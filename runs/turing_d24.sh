@@ -6,6 +6,9 @@
 #SBATCH --mem=256G
 #SBATCH --time=24:00:00
 #SBATCH --output=%x-%j.out
+# TIME_LIMIT_80 warns early enough to plan a resume before the job is killed.
+#SBATCH --mail-type=BEGIN,END,FAIL,TIME_LIMIT_80
+#SBATCH --mail-user=djadczak@wpi.edu
 # Uncomment and set once you know Turing's partitions/GPU types (`sinfo -o "%P %G %l %D"`):
 # #SBATCH --partition=<partition>
 # #SBATCH --constraint=<A100|H100>
