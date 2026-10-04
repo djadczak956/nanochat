@@ -63,7 +63,7 @@ torchrun --standalone --nproc_per_node="$NGPU" -m scripts.base_train -- \
     --run="$WANDB_RUN" \
     $FP8_FLAG
 
-torchrun --standalone --nproc_per_node="$NGPU" -m scripts.base_eval -- --device-batch-size="$DBS"
+torchrun --standalone --nproc_per_node="$NGPU" -m scripts.base_eval -- --model-tag="d$DEPTH" --device-batch-size="$DBS"
 
 if [[ "$WANDB_MODE" == offline ]]; then
     echo "wandb ran offline. On the login node: cd $SLURM_SUBMIT_DIR && wandb sync wandb/offline-run-*"
