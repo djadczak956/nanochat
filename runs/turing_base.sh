@@ -18,6 +18,8 @@
 # Small model, one GPU:        DEPTH=5 sbatch -J nanochat-d5 --gres=gpu:1 --cpus-per-task=8 --mem=64G --time=04:00:00 runs/turing_base.sh
 # Resume after a timeout:      DEPTH=24 RESUME_STEP=<step> sbatch -J nanochat-d24 runs/turing_base.sh
 # Name the wandb run:          WANDB_RUN=d24-try2 (default: d<DEPTH>)
+# Precision:                   FP8=auto|on|off (auto = on for Hopper+)
+# Depth sweep 1-23:            bash runs/turing_sweep.sh
 
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
@@ -25,7 +27,8 @@ source .venv/bin/activate
 
 export OMP_NUM_THREADS=1
 export NANOCHAT_BASE_DIR="$HOME/projects/nanochat_data"
-DEPTH="${DEPTH:-24}"
+# In a job array, each task takes its depth from its array index.
+DEPTH="${SLURM_ARRAY_TASK_ID:-${DEPTH:-24}}"
 WANDB_RUN="${WANDB_RUN:-d$DEPTH}"
 SAVE_EVERY="${SAVE_EVERY:-500}"
 RESUME_STEP="${RESUME_STEP:--1}"
@@ -42,8 +45,9 @@ GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)
 GPU_MEM_MB=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | head -1)
 
 # FP8 needs Hopper or newer.
+FP8="${FP8:-auto}"
 FP8_FLAG=""
-[[ "$GPU_NAME" =~ H100|H200|B200 ]] && FP8_FLAG="--fp8"
+if [[ "$FP8" == on || ( "$FP8" == auto && "$GPU_NAME" =~ H100|H200|B200 ) ]]; then FP8_FLAG="--fp8"; fi
 
 # Total batch size is fixed, so a smaller device batch only adds grad accumulation steps.
 if (( GPU_MEM_MB >= 70000 )); then DBS=16; else DBS=8; fi
