@@ -14,6 +14,7 @@
 # Submit from the repo root:
 #   DEPTH=24 sbatch -J sft-d24 runs/turing_sft.sh
 #   DEPTH=4  sbatch -J sft-d4 --gres=gpu:L40S:1 --cpus-per-task=8 --mem=64G --time=02:00:00 runs/turing_sft.sh
+# Several 1-GPU models one after another: bash runs/turing_sft_series.sh 1-3,5-9
 
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR"
@@ -21,7 +22,8 @@ source .venv/bin/activate
 
 export OMP_NUM_THREADS=1
 export NANOCHAT_BASE_DIR="$HOME/projects/nanochat_data"
-DEPTH="${DEPTH:?set DEPTH, e.g. DEPTH=24}"
+# In a job array, each task takes its depth from its array index.
+DEPTH="${SLURM_ARRAY_TASK_ID:-${DEPTH:?set DEPTH, e.g. DEPTH=24}}"
 WANDB_RUN="${WANDB_RUN:-sft-d$DEPTH}"
 
 if curl -s --max-time 5 -o /dev/null https://api.wandb.ai; then
