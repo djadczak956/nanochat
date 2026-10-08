@@ -2,8 +2,8 @@
 # Train a list of depths one after another on a single GPU, as one job array.
 # Run on the login node from the repo root:
 #   bash runs/turing_series.sh 1,3,6-9
-# Extra arguments go to sbatch, e.g. to pin the GPU type:
-#   bash runs/turing_series.sh 6-9 --gres=gpu:l40s:1
+# Defaults to one L40S (d6-d9 failed on a Blackwell node). Extra arguments go to sbatch, e.g.:
+#   bash runs/turing_series.sh 14-16 --gres=gpu:L40S:2 --cpus-per-task=16 --mem=128G
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -16,4 +16,4 @@ export WANDB_RUN_GROUP=depth-sweep
 
 # %1 runs the array's tasks one at a time.
 sbatch -J series --array="$DEPTHS%1" --output=%x-d%a-%A.out \
-    --gres=gpu:1 --cpus-per-task=8 --mem=64G --time=04:00:00 "$@" runs/turing_base.sh
+    --gres=gpu:L40S:1 --cpus-per-task=8 --mem=64G --time=04:00:00 "$@" runs/turing_base.sh
