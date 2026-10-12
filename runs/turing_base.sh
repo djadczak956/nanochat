@@ -8,7 +8,6 @@
 #SBATCH --output=%x-%j.out
 # TIME_LIMIT_80 warns early enough to plan a resume before the job is killed.
 #SBATCH --mail-type=BEGIN,END,FAIL,TIME_LIMIT_80
-#SBATCH --mail-user=djadczak@wpi.edu
 # Uncomment and set once you know Turing's partitions/GPU types (`sinfo -o "%P %G %l %D"`):
 # #SBATCH --partition=<partition>
 # #SBATCH --constraint=<A100|H100>
@@ -26,7 +25,7 @@ cd "$SLURM_SUBMIT_DIR"
 source .venv/bin/activate
 
 export OMP_NUM_THREADS=1
-export NANOCHAT_BASE_DIR="$HOME/projects/nanochat_data"
+export NANOCHAT_BASE_DIR="${NANOCHAT_BASE_DIR:-$HOME/projects/nanochat_data}"
 # In a job array, each task takes its depth from its array index.
 DEPTH="${SLURM_ARRAY_TASK_ID:-${DEPTH:-24}}"
 WANDB_RUN="${WANDB_RUN:-d$DEPTH}"

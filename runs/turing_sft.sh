@@ -7,7 +7,6 @@
 #SBATCH --time=08:00:00
 #SBATCH --output=%x-%j.out
 #SBATCH --mail-type=BEGIN,END,FAIL,TIME_LIMIT_80
-#SBATCH --mail-user=djadczak@wpi.edu
 
 # Fine-tune a trained base model into a chat model (SFT), then run the chat eval.
 # Request as many GPUs as the base model trained on (checked below).
@@ -21,7 +20,7 @@ cd "$SLURM_SUBMIT_DIR"
 source .venv/bin/activate
 
 export OMP_NUM_THREADS=1
-export NANOCHAT_BASE_DIR="$HOME/projects/nanochat_data"
+export NANOCHAT_BASE_DIR="${NANOCHAT_BASE_DIR:-$HOME/projects/nanochat_data}"
 # In a job array, each task takes its depth from its array index.
 DEPTH="${SLURM_ARRAY_TASK_ID:-${DEPTH:?set DEPTH, e.g. DEPTH=24}}"
 WANDB_RUN="${WANDB_RUN:-sft-d$DEPTH}"

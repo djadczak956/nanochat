@@ -10,5 +10,5 @@ DEPTHS="${1:?usage: bash runs/turing_sft_series.sh <depths, e.g. 1-3,5-9> [sbatc
 shift
 
 # %1 runs the array's tasks one at a time.
-sbatch -J sft-series --array="$DEPTHS%1" --output=%x-d%a-%A.out \
+sbatch -J sft-series --array="$DEPTHS%1" --output=%x-d%a-%A.out --mail-user="$USER@wpi.edu" \
     --gres=gpu:L40S:1 --cpus-per-task=8 --mem=64G --time=04:00:00 "$@" runs/turing_sft.sh

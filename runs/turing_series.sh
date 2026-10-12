@@ -15,5 +15,5 @@ export FP8=off
 export WANDB_RUN_GROUP=depth-sweep
 
 # %1 runs the array's tasks one at a time.
-sbatch -J series --array="$DEPTHS%1" --output=%x-d%a-%A.out \
+sbatch -J series --array="$DEPTHS%1" --output=%x-d%a-%A.out --mail-user="$USER@wpi.edu" \
     --gres=gpu:L40S:1 --cpus-per-task=8 --mem=64G --time=04:00:00 "$@" runs/turing_base.sh

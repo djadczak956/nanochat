@@ -14,7 +14,7 @@ LARGE="${LARGE:-19-23}"
 export FP8=off
 export WANDB_RUN_GROUP=depth-sweep
 
-common=(--parsable --output=%x-d%a-%A.out)
+common=(--parsable --output=%x-d%a-%A.out --mail-user="$USER@wpi.edu")
 
 # %N caps how many tasks of an array run at once.
 a=$(SAVE_EVERY=50 sbatch "${common[@]}" -J sweep-small --array="$SMALL%4" \
