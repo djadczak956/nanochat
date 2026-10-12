@@ -131,7 +131,7 @@ minutes to an hour on one GPU. SFT: ~16 min for d4 on 1 GPU, ~70 min for d24 on 
 
 ## Hidden states
 
-`nanochat_viz/record.py` in the `inn_sequence` repo (not pushed yet as of 2026-10-12; ask Damian) loads a checkpoint and records the residual
+`nanochat_viz/record.py` in the `inn_sequence` repo (branch `mqp26-27`) loads a checkpoint and records the residual
 stream after each block (depth + 1 states) and after each attention / MLP half-step
 (2·depth + 1). nanochat re-injects the embedding before every block (`x ← λ·x + μ·x0`), so a
 block's input is not the previous block's output; the recorder stores block inputs separately
