@@ -1,4 +1,5 @@
 ---
+license: mit
 language:
 - en
 pipeline_tag: text-generation
@@ -116,6 +117,14 @@ tokenizer/                                tokenizer.pkl, token_bytes.pt
 ```
 
 Only each model's final checkpoint is included, without optimizer state.
+
+## License
+
+The weights and this card are released under the MIT license (see `LICENSE`); nanochat itself
+is MIT-licensed by Andrej Karpathy. Training data licenses: SmolTalk is Apache-2.0, MMLU and
+GSM8K are MIT. The pretraining data is `karpathy/climbmix-400b-shuffle` (tagged MIT), a
+repackaging of NVIDIA's ClimbMix, which is licensed CC BY-NC 4.0 (non-commercial). Check
+whether that matters for your use before using these models commercially.
 
 ## Limitations
 
