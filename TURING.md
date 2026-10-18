@@ -14,18 +14,19 @@ in `runs/turing_*.sh` only pick the depth and the cluster resources.
 Pipeline per model: **pretraining** (`scripts/base_train.py`, almost all the compute) →
 **SFT** (`scripts/chat_sft.py`, a few percent of that). The tokenizer is trained once and shared.
 
-## Status (2026-10-14)
+## Status (2026-10-18)
+
+All base models d1–d24 are trained.
 
 | Depths | Base | Chat (SFT) | GPUs used in pretraining |
 |---|---|---|---|
 | 1–9 | done | done | 1 |
 | 10–12 | done | not yet | 1 |
 | 13–14 | done (each trained twice by accident; the files on disk are from job 2351564) | not yet | 2 |
-| 15–18 | done | not yet | 4 |
-| 19–23 | planned, one or two per day | | 4 |
+| 15–23 | done | not yet | 4 |
 | 24 | done | done | 4 |
 
-Final checkpoints (base d1–d18 and d24, chat d1–d9 and d24) are in the Hugging Face repo
+Final checkpoints (base d1–d24, chat d1–d9 and d24) are in the Hugging Face repo
 `damopierog/nanochat-depth-sweep`. Its layout mirrors the data directory
 below, so `hf download damopierog/nanochat-depth-sweep --local-dir <dir>` gives a usable
 `NANOCHAT_BASE_DIR`.

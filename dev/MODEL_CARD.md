@@ -52,9 +52,14 @@ Training code and job scripts: [djadczak956/nanochat](https://github.com/djadcza
 | d16 | 1024 | 8  | 536.9M  | 234.9M | 3,584 | 1.88B | 0.799 | 0.184  | —     | —     |
 | d17 | 1152 | 9  | 686.0M  | 308.5M | 2,353 | 2.47B | 0.781 | 0.204  | —     | —     |
 | d18 | 1152 | 9  | 701.9M  | 324.4M | 2,475 | 2.60B | 0.777 | 0.207  | —     | —     |
+| d19 | 1280 | 10 | 876.9M  | 415.5M | 3,170 | 3.32B | 0.758 | 0.219  | —     | —     |
+| d20 | 1280 | 10 | 896.5M  | 435.2M | 3,320 | 3.48B | 0.753 | 0.235  | —     | —     |
+| d21 | 1408 | 11 | 1,099.4M | 545.7M | 4,163 | 4.37B | 0.738 | 0.252  | —     | —     |
+| d22 | 1408 | 11 | 1,123.2M | 569.5M | 4,345 | 4.56B | 0.734 | 0.249  | —     | —     |
+| d23 | 1536 | 12 | 1,355.8M | 701.5M | 5,352 | 5.61B | 0.721 | 0.264  | —     | —     |
 | d24 | 1536 | 12 | 1,384.1M | 729.8M | 5,568 | 5.84B | 0.718 | 0.267  | 467   | 0.204 |
 
-Depths 19–23 are in progress; chat versions of d10–d18 are not trained yet. CORE varies run to run: d14 trained twice with identical settings scored 0.161 and 0.167.
+Chat versions of d10–d23 are not trained yet. CORE varies run to run: d14 trained twice with identical settings scored 0.161 and 0.167.
 
 - **Width** is depth × 64, rounded up to a multiple of 128 so every attention head is 128 wide. Deeper models are therefore also wider.
 - **Params (total)** is dominated by embedding tables (one row per vocabulary token), which are lookups rather than computation. **Params (matrices + head)** counts only the weights that do matrix multiplies; nanochat sizes the training run from this number.
@@ -79,7 +84,7 @@ The x0 re-injection matters for anyone studying hidden-state dynamics: a block's
 
 ## Training
 
-**Pretraining.** ClimbMix web text, 2,048-token sequences, tokenizer: 32,768-token BPE trained on the same data. Each model sees 8 tokens per matrix parameter, slightly fewer than compute-optimal; batch size and learning rates are set automatically from model size. Muon optimizer for matrices and AdamW for embeddings, bf16 compute, no FP8. Trained on NVIDIA L40S GPUs on WPI's Turing cluster: one GPU for d1–d12, two for d13–d14, four for d15–d18 and d24 (d24 took 19 hours). The GPU count does not change the training math (same total batch per step).
+**Pretraining.** ClimbMix web text, 2,048-token sequences, tokenizer: 32,768-token BPE trained on the same data. Each model sees 8 tokens per matrix parameter, slightly fewer than compute-optimal; batch size and learning rates are set automatically from model size. Muon optimizer for matrices and AdamW for embeddings, bf16 compute, no FP8. Trained on NVIDIA L40S GPUs on WPI's Turing cluster: one GPU for d1–d12, two for d13–d14, four for d15–d24 (d23 took 13 hours, d24 19). The GPU count does not change the training math (same total batch per step).
 
 **SFT.** One pass over a mixture of SmolTalk (general conversations), MMLU (multiple choice, 3 copies) and GSM8K (math with a calculator tool, 4 copies), starting from the base model's weights and optimizer state.
 
