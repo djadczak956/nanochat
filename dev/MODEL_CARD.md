@@ -32,40 +32,38 @@ Training code and job scripts: [djadczak956/nanochat](https://github.com/djadcza
 
 ## Models
 
-| Depth | Width | Heads | Params (total) | Params (matrices + head) | Pretrain steps | Pretrain tokens | Val bpb ↓ | CORE ↑ | Chat steps | ChatCORE ↑ |
-|---|---|---|---|---|---|---|---|---|---|---|
-| d1  | 128  | 1  | 12.8M   | 4.4M   | 268   | 0.04B | 1.496 | −0.016 | 3,734 | 0.006 |
-| d2  | 128  | 1  | 13.0M   | 4.6M   | 280   | 0.04B | 1.416 | −0.007 | 3,734 | 0.005 |
-| d3  | 256  | 2  | 35.9M   | 10.7M  | 328   | 0.09B | 1.214 | 0.033  | 1,867 | 0.002 |
-| d4  | 256  | 2  | 36.7M   | 11.5M  | 352   | 0.09B | 1.192 | 0.037  | 1,867 | 0.011 |
-| d5  | 384  | 3  | 71.8M   | 21.4M  | 654   | 0.17B | 1.075 | 0.063  | 1,867 | 0.029 |
-| d6  | 384  | 3  | 73.5M   | 23.2M  | 708   | 0.19B | 1.053 | 0.063  | 1,867 | 0.040 |
-| d7  | 512  | 4  | 122.7M  | 38.8M  | 1,184 | 0.31B | 0.982 | 0.087  | 1,867 | 0.056 |
-| d8  | 512  | 4  | 125.8M  | 41.9M  | 1,280 | 0.34B | 0.968 | 0.096  | 1,867 | 0.049 |
-| d9  | 640  | 5  | 191.0M  | 65.2M  | 995   | 0.52B | 0.928 | 0.108  | 934   | 0.069 |
-| d10 | 640  | 5  | 196.0M  | 70.1M  | 1,070 | 0.56B | 0.918 | 0.111  | —     | —     |
-| d11 | 768  | 6  | 279.2M  | 103.0M | 1,572 | 0.82B | 0.877 | 0.126  | —     | —     |
-| d12 | 768  | 6  | 286.3M  | 110.1M | 1,680 | 0.88B | 0.868 | 0.147  | —     | —     |
-| d13 | 896  | 7  | 389.5M  | 154.6M | 2,359 | 1.24B | 0.837 | 0.169  | —     | —     |
-| d14 | 896  | 7  | 399.1M  | 164.2M | 2,506 | 1.31B | 0.830 | 0.167  | —     | —     |
-| d15 | 1024 | 8  | 524.3M  | 222.3M | 3,392 | 1.78B | 0.805 | 0.189  | —     | —     |
-| d16 | 1024 | 8  | 536.9M  | 234.9M | 3,584 | 1.88B | 0.799 | 0.184  | —     | —     |
-| d17 | 1152 | 9  | 686.0M  | 308.5M | 2,353 | 2.47B | 0.781 | 0.204  | —     | —     |
-| d18 | 1152 | 9  | 701.9M  | 324.4M | 2,475 | 2.60B | 0.777 | 0.207  | —     | —     |
-| d19 | 1280 | 10 | 876.9M  | 415.5M | 3,170 | 3.32B | 0.758 | 0.219  | —     | —     |
-| d20 | 1280 | 10 | 896.5M  | 435.2M | 3,320 | 3.48B | 0.753 | 0.235  | —     | —     |
-| d21 | 1408 | 11 | 1,099.4M | 545.7M | 4,163 | 4.37B | 0.738 | 0.252  | —     | —     |
-| d22 | 1408 | 11 | 1,123.2M | 569.5M | 4,345 | 4.56B | 0.734 | 0.249  | —     | —     |
-| d23 | 1536 | 12 | 1,355.8M | 701.5M | 5,352 | 5.61B | 0.721 | 0.264  | —     | —     |
-| d24 | 1536 | 12 | 1,384.1M | 729.8M | 5,568 | 5.84B | 0.718 | 0.267  | 467   | 0.204 |
+| Depth | Width | Heads | Params (total) | Params (matrices + head) | Pretrain steps | Pretrain tokens | Val bpb ↓ |
+|---|---|---|---|---|---|---|---|
+| d1  | 128  | 1  | 12.8M   | 4.4M   | 268   | 0.04B | 1.496 |
+| d2  | 128  | 1  | 13.0M   | 4.6M   | 280   | 0.04B | 1.416 |
+| d3  | 256  | 2  | 35.9M   | 10.7M  | 328   | 0.09B | 1.214 |
+| d4  | 256  | 2  | 36.7M   | 11.5M  | 352   | 0.09B | 1.192 |
+| d5  | 384  | 3  | 71.8M   | 21.4M  | 654   | 0.17B | 1.075 |
+| d6  | 384  | 3  | 73.5M   | 23.2M  | 708   | 0.19B | 1.053 |
+| d7  | 512  | 4  | 122.7M  | 38.8M  | 1,184 | 0.31B | 0.982 |
+| d8  | 512  | 4  | 125.8M  | 41.9M  | 1,280 | 0.34B | 0.968 |
+| d9  | 640  | 5  | 191.0M  | 65.2M  | 995   | 0.52B | 0.928 |
+| d10 | 640  | 5  | 196.0M  | 70.1M  | 1,070 | 0.56B | 0.918 |
+| d11 | 768  | 6  | 279.2M  | 103.0M | 1,572 | 0.82B | 0.877 |
+| d12 | 768  | 6  | 286.3M  | 110.1M | 1,680 | 0.88B | 0.868 |
+| d13 | 896  | 7  | 389.5M  | 154.6M | 2,359 | 1.24B | 0.837 |
+| d14 | 896  | 7  | 399.1M  | 164.2M | 2,506 | 1.31B | 0.830 |
+| d15 | 1024 | 8  | 524.3M  | 222.3M | 3,392 | 1.78B | 0.805 |
+| d16 | 1024 | 8  | 536.9M  | 234.9M | 3,584 | 1.88B | 0.799 |
+| d17 | 1152 | 9  | 686.0M  | 308.5M | 2,353 | 2.47B | 0.781 |
+| d18 | 1152 | 9  | 701.9M  | 324.4M | 2,475 | 2.60B | 0.777 |
+| d19 | 1280 | 10 | 876.9M  | 415.5M | 3,170 | 3.32B | 0.758 |
+| d20 | 1280 | 10 | 896.5M  | 435.2M | 3,320 | 3.48B | 0.753 |
+| d21 | 1408 | 11 | 1,099.4M | 545.7M | 4,163 | 4.37B | 0.738 |
+| d22 | 1408 | 11 | 1,123.2M | 569.5M | 4,345 | 4.56B | 0.734 |
+| d23 | 1536 | 12 | 1,355.8M | 701.5M | 5,352 | 5.61B | 0.721 |
+| d24 | 1536 | 12 | 1,384.1M | 729.8M | 5,568 | 5.84B | 0.718 |
 
-Chat versions of d10–d23 are not trained yet. CORE varies run to run: d14 trained twice with identical settings scored 0.161 and 0.167.
+Chat versions of d10–d23 are not trained yet.
 
 - **Width** is depth × 64, rounded up to a multiple of 128 so every attention head is 128 wide. Deeper models are therefore also wider.
 - **Params (total)** is dominated by embedding tables (one row per vocabulary token), which are lookups rather than computation. **Params (matrices + head)** counts only the weights that do matrix multiplies; nanochat sizes the training run from this number.
 - **Val bpb** (bits per byte): how well the base model predicts held-out text, normalized by text length. Lower is better.
-- **CORE**: average score over 22 benchmark tasks (HellaSwag, ARC, and others), centered so 0 is random guessing and 1 is perfect.
-- **ChatCORE**: the same idea for chat models, over ARC-Easy, ARC-Challenge, MMLU, GSM8K and HumanEval.
 
 ## Architecture
 
@@ -133,4 +131,4 @@ whether that matters for your use before using these models commercially.
 
 ## Limitations
 
-These are small research models. They state false facts confidently, repeat themselves, and have no safety training. d1–d4 chat models score at chance on ChatCORE, and many of their replies never end. Intended for studying model internals, not for use as assistants.
+These are small research models. They state false facts confidently, repeat themselves, and have no safety training. d1–d4 chat models score at chance on chat benchmarks, and many of their replies never end. Intended for studying model internals, not for use as assistants.
